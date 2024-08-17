@@ -102,6 +102,7 @@
               <th>Email</th>
               <th>Quantity</th>
               <th>Total Amount</th>
+              <th>Payment Type</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -114,6 +115,7 @@
               <th>Email</th>
               <th>Quantity</th>
               <th>Total Amount</th>
+              <th>Payment Type</th>
               <th>Status</th>
               <th>Action</th>
               </tr>
@@ -128,6 +130,7 @@
                     <td>{{$order->email}}</td>
                     <td>{{$order->quantity}}</td>
                     <td>Rs {{number_format($order->total_amount,2)}}</td>
+                    <td>{{$order->payment_method}}</td>
                     <td>
                         @if($order->status=='new')
                           <span class="badge badge-primary">{{$order->status}}</span>

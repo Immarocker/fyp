@@ -165,9 +165,9 @@ class KhaltiController extends Controller
             
             Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
     
-            request()->session()->flash('success', 'Your book successfully placed in order');
-            return redirect()->route('home');
+           
         }
+       return redirect()->route('home')->with('success','Your order placed successfully');
     }
     
 }

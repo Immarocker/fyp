@@ -49,11 +49,11 @@
     Route::get('user/register', [FrontendController::class, 'register'])->name('register.form');
     Route::post('user/register', [FrontendController::class, 'registerSubmit'])->name('register.submit');
 // Reset password
-    Route::post('password-reset', [FrontendController::class, 'showResetForm'])->name('password.reset');
-    Route::get('password-reset', [FrontendController::class, 'showResetForm'])->name('password.reset');
+    Route::post('submitpassword-reset', [FrontendController::class, 'showResetForm'])->name('password.reset');
+    Route::get('password-reset', [FrontendController::class, 'showResetForm'])->name('reset.password');
     Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('passwordtoken.reset');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
 // Socialite
@@ -112,7 +112,7 @@
 
 // Product Review
     Route::resource('/review', 'ProductReviewController');
-    Route::post('product/{slug}/review', [ProductReviewController::class, 'store'])->name('review.store');
+    Route::post('product/{slug}/review', [ProductReviewController::class, 'store'])->name('productreview.store');
 
 // Post Comment
     Route::post('post/{slug}/comment', [PostCommentController::class, 'store'])->name('post-comment.store');
@@ -203,7 +203,7 @@ Route::get('/payment/cancel', [KhaltiController::class, 'cancel'])->name('paymen
 
         // Password Change
         Route::get('change-password', [HomeController::class, 'changePassword'])->name('user.change.password.form');
-        Route::post('change-password', [HomeController::class, 'changPasswordStore'])->name('change.password');
+        Route::post('change-password', [HomeController::class, 'changPasswordStore'])->name('user.change.password');
 
     });
 

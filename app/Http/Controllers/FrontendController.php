@@ -17,6 +17,7 @@ use DB;
 use Hash;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 class FrontendController extends Controller
 {
    
@@ -357,7 +358,7 @@ class FrontendController extends Controller
             return redirect()->route('home');
         }
         else{
-            request()->session()->flash('error','Invalid email and password pleas try again!');
+            request()->session()->flash('error','Invalid email and password please try again!');
             return redirect()->back();
         }
     }
@@ -377,7 +378,7 @@ class FrontendController extends Controller
         $this->validate($request,[
             'name'=>'string|required|min:2',
             'email'=>'string|required|unique:users,email',
-            'password'=>'required|min:6|confirmed',
+            'password'=>'required|min:4|confirmed',
         ]);
         $data=$request->all();
         // dd($data);
@@ -385,10 +386,10 @@ class FrontendController extends Controller
         Session::put('user',$data['email']);
         if($check){
             request()->session()->flash('success','Successfully registered');
-            return redirect()->route('home');
+            return redirect()->route('login.form');
         }
         else{
-            request()->session()->flash('error','Please try again!');
+            request()->session()->flash('error','Registration failed. Please try again!');
             return back();
         }
     }
@@ -406,21 +407,27 @@ class FrontendController extends Controller
     }
 
     public function subscribe(Request $request){
-        if(! Newsletter::isSubscribed($request->email)){
-                Newsletter::subscribePending($request->email);
-                if(Newsletter::lastActionSucceeded()){
-                    request()->session()->flash('success','Subscribed! Please check your email');
-                    return redirect()->route('home');
-                }
-                else{
-                    Newsletter::getLastError();
-                    return back()->with('error','Something went wrong! please try again');
-                }
-            }
-            else{
-                request()->session()->flash('error','Already Subscribed');
-                return back();
-            }
-    }
+        $request->validate([
+            'subscriber_email' => 'required|email'
+        ]);
     
+        try {
+           
+            if (Newsletter::isSubscribed($request->subscriber_email)) {
+               
+                return redirect()->back()->with('error', 'Email already subscribed');
+            } else {
+                
+                $response = Newsletter::subscribe($request->subscriber_email);
+                dd($response);
+                Log::info('Mailchimp Response:', ['response' => $response]);
+                return redirect()->back()->with('success', 'Email subscribed');
+            }
+        } catch (Exception $e) {
+            Log::error('Subscription Error:', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
 }
+
+

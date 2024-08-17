@@ -12,7 +12,7 @@
     use App\Http\Controllers\ProductReviewController;
     use App\Http\Controllers\PostCommentController;
     use App\Http\Controllers\CouponController;
-    use App\Http\Controllers\PayPalController;
+    use App\Http\Controllers\KhaltiController;
     use App\Http\Controllers\NotificationController;
     use App\Http\Controllers\HomeController;
     use \UniSharp\LaravelFilemanager\Lfm;
@@ -50,6 +50,12 @@
     Route::post('user/register', [FrontendController::class, 'registerSubmit'])->name('register.submit');
 // Reset password
     Route::post('password-reset', [FrontendController::class, 'showResetForm'])->name('password.reset');
+    Route::get('password-reset', [FrontendController::class, 'showResetForm'])->name('password.reset');
+    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
 // Socialite
     Route::get('login/{provider}/', [LoginController::class, 'redirect'])->name('login.redirect');
     Route::get('login/{provider}/callback/', [LoginController::class, 'Callback'])->name('login.callback');
@@ -102,6 +108,7 @@
 
 // NewsLetter
     Route::post('/subscribe', [FrontendController::class, 'subscribe'])->name('subscribe');
+   
 
 // Product Review
     Route::resource('/review', 'ProductReviewController');
@@ -112,11 +119,13 @@
     Route::resource('/comment', 'PostCommentController');
 // Coupon
     Route::post('/coupon-store', [CouponController::class, 'couponStore'])->name('coupon-store');
-// Payment
-    Route::get('payment', [PayPalController::class, 'payment'])->name('payment');
-    Route::get('cancel', [PayPalController::class, 'cancel'])->name('payment.cancel');
-    Route::get('payment/success', [PayPalController::class, 'success'])->name('payment.success');
 
+// Payment
+
+Route::post('/khalti/verifyPayment', [KhaltiController::class, 'success'])->name('verifyPayment');
+Route::post('/khalti/storePayment', [KhaltiController::class, 'storePayment'])->name('khalti.storePayment');
+Route::get('/payment/success', [KhaltiController::class, 'success'])->name('payment.success');
+Route::get('/payment/cancel', [KhaltiController::class, 'cancel'])->name('payment.cancel');
 
 // Backend section start
 

@@ -9,8 +9,13 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Order Lists</h6>
+    <div class="d-flex align-items-center justify-content-between">
+    <h6 class="m-0 font-weight-bold text-primary">Order Lists</h6>
+    <div class="order-tracking">
+        <i class="ti-location-pin"></i> 
+        <a href="{{route('order.track')}}">Track Order</a>
     </div>
+</div>
     <div class="card-body">
       <div class="table-responsive">
         @if(count($orders)>0)
@@ -49,8 +54,8 @@
                     <td>{{$order->first_name}} {{$order->last_name}}</td>
                     <td>{{$order->email}}</td>
                     <td>{{$order->quantity}}</td>
-                    <td>${{$order->shipping->price}}</td>
-                    <td>${{number_format($order->total_amount,2)}}</td>
+                    <<td>Rs {{ $order->shipping ? $order->shipping->price : 'N/A' }}</td>
+                    <td>Rs {{number_format($order->total_amount,2)}}</td>
                     <td>
                         @if($order->status=='new')
                           <span class="badge badge-primary">{{$order->status}}</span>
@@ -66,8 +71,7 @@
                         <a href="{{route('user.order.show',$order->id)}}" class="btn btn-warning btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="view" data-placement="bottom"><i class="fas fa-eye"></i></a>
                         <form method="POST" action="{{route('user.order.delete',[$order->id])}}">
                           @csrf
-                          @method('delete')
-                              <button class="btn btn-danger btn-sm dltBtn" data-id={{$order->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                         
                         </form>
                     </td>
                 </tr>
@@ -76,7 +80,7 @@
         </table>
         <span style="float:right">{{$orders->links()}}</span>
         @else
-          <h6 class="text-center">No orders found!!! Please order some products</h6>
+          <h6 class="text-center">No orders found!!! Please order some books</h6>
         @endif
       </div>
     </div>

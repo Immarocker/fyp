@@ -9,8 +9,8 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Product Lists</h6>
-      <a href="{{route('product.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Product</a>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Book Lists</h6>
+      <a href="{{route('product.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Book</a>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -24,7 +24,7 @@
               <th>Is Featured</th>
               <th>Price</th>
               <th>Discount</th>
-              <th>Language</th>
+              <th>IBAN  </th>
               <th>Condition</th>
               <th>Author</th>
               <th>Stock</th>
@@ -41,7 +41,7 @@
               <th>Is Featured</th>
               <th>Price</th>
               <th>Discount</th>
-              <th>Language</th>
+              <th>IBAN  </th>
               <th>Condition</th>
               <th>Author</th>
               <th>Stock</th>
@@ -61,7 +61,7 @@
                 <tr>
                     <td>{{$product->id}}</td>
                     <td>{{$product->title}}</td>
-                    <td>{{$product->cat_info['title']}}
+                    <td>{{ $product->cat_info['title'] ?? 'No Title Available' }}</td>
                       <sub>
                           {{$product->sub_cat_info->title ?? ''}}
                       </sub>
@@ -71,7 +71,7 @@
                     <td>  {{$product->discount}}% OFF</td>
                     <td>{{$product->size}}</td>
                     <td>{{$product->condition}}</td>
-                    <td>{{ ucfirst($product->brand->title ?? '') }}</td>
+                    <td>{{ ucfirst(optional($product->brand)->title) }}</td>
                     <td>
                       @if($product->stock>0)
                       <span class="badge badge-primary">{{$product->stock}}</span>
@@ -111,7 +111,7 @@
         </table>
         <span style="float:right">{{$products->links()}}</span>
         @else
-          <h6 class="text-center">No Products found!!! Please create Product</h6>
+          <h6 class="text-center">No Books found!!! Please create Book</h6>
         @endif
       </div>
     </div>

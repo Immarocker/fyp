@@ -9,16 +9,20 @@
         @csrf 
         {{-- @method('PATCH') --}}
         {{-- {{dd($data)}} --}}
+        
         <div class="form-group">
           <label for="short_des" class="col-form-label">Short Description <span class="text-danger">*</span></label>
-          <textarea class="form-control" id="quote" name="short_des">{{$data->short_des}}</textarea>
+          <textarea class="form-control" id="quote" name="short_des">
+        {{ isset($data->short_des) ? $data->short_des : '' }}
+        </textarea>
           @error('short_des')
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
+
         <div class="form-group">
           <label for="description" class="col-form-label">Description <span class="text-danger">*</span></label>
-          <textarea class="form-control" id="description" name="description">{{$data->description}}</textarea>
+          <textarea class="form-control" id="description" name="description">{{ isset($data->description) ? $data->description : '' }}</textarea>
           @error('description')
           <span class="text-danger">{{$message}}</span>
           @enderror
@@ -32,7 +36,7 @@
                   <i class="fa fa-picture-o"></i> Choose
                   </a>
               </span>
-          <input id="thumbnail1" class="form-control" type="text" name="logo" value="{{$data->logo}}">
+          <input id="thumbnail1" class="form-control" type="text" name="logo" value="{{ isset($data->logo) ? $data->logo : '' }}">
         </div>
         <div id="holder1" style="margin-top:15px;max-height:100px;"></div>
 
@@ -49,7 +53,7 @@
                   <i class="fa fa-picture-o"></i> Choose
                   </a>
               </span>
-          <input id="thumbnail" class="form-control" type="text" name="photo" value="{{$data->photo}}">
+          <input id="thumbnail" class="form-control" type="text" name="photo" value="{{ isset($data->photo) ? $data->photo : '' }}">
         </div>
         <div id="holder" style="margin-top:15px;max-height:100px;"></div>
 
@@ -60,21 +64,23 @@
 
         <div class="form-group">
           <label for="address" class="col-form-label">Address <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" name="address" required value="{{$data->address}}">
+          <input type="text" class="form-control" name="address" required value="{{ isset($data->address) ? $data->address : '' }}">
           @error('address')
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
+
         <div class="form-group">
           <label for="email" class="col-form-label">Email <span class="text-danger">*</span></label>
-          <input type="email" class="form-control" name="email" required value="{{$data->email}}">
+          <input type="email" class="form-control" name="email" required value="{{ isset($data->email) ? $data->email : '' }}">
           @error('email')
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
+
         <div class="form-group">
           <label for="phone" class="col-form-label">Phone Number <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" name="phone" required value="{{$data->phone}}">
+          <input type="text" class="form-control" name="phone" required value="{{ isset($data->phone) ? $data->phone : '' }}">
           @error('phone')
           <span class="text-danger">{{$message}}</span>
           @enderror
@@ -92,8 +98,8 @@
 @push('styles')
 <link rel="stylesheet" href="{{asset('backend/summernote/summernote.min.css')}}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-
 @endpush
+
 @push('scripts')
 <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
 <script src="{{asset('backend/summernote/summernote.min.js')}}"></script>
@@ -102,26 +108,28 @@
 <script>
     $('#lfm').filemanager('image');
     $('#lfm1').filemanager('image');
+
     $(document).ready(function() {
-    $('#summary').summernote({
-      placeholder: "Write short description.....",
+      $('#summary').summernote({
+        placeholder: "Write short description.....",
         tabsize: 2,
         height: 150
-    });
+      });
     });
 
     $(document).ready(function() {
       $('#quote').summernote({
         placeholder: "Write short Quote.....",
-          tabsize: 2,
-          height: 100
+        tabsize: 2,
+        height: 100
       });
     });
+
     $(document).ready(function() {
       $('#description').summernote({
-        placeholder: "Write detail description.....",
-          tabsize: 2,
-          height: 150
+        placeholder: "Write detailed description.....",
+        tabsize: 2,
+        height: 150
       });
     });
 </script>

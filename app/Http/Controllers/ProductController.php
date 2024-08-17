@@ -57,7 +57,7 @@ class ProductController extends Controller
             'child_cat_id'=>'nullable|exists:categories,id',
             'is_featured'=>'sometimes|in:1',
             'status'=>'required|in:active,inactive',
-            'condition'=>'required|in:default,new,hot',
+            'condition'=>'in:default,new,hot',
             'price'=>'required|numeric',
             'discount'=>'nullable|numeric'
         ]);
@@ -70,18 +70,11 @@ class ProductController extends Controller
         }
         $data['slug']=$slug;
         $data['is_featured']=$request->input('is_featured',0);
-        $size=$request->input('size');
-        if($size){
-            $data['size']=implode(',',$size);
-        }
-        else{
-            $data['size']='';
-        }
         // return $size;
         // return $data;
         $status=Product::create($data);
         if($status){
-            request()->session()->flash('success','Product Successfully added');
+            request()->session()->flash('success','Book Successfully added');
         }
         else{
             request()->session()->flash('error','Please try again!!');
@@ -128,6 +121,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+
+
         $product=Product::findOrFail($id);
         $this->validate($request,[
             'title'=>'string|required',
@@ -141,30 +137,22 @@ class ProductController extends Controller
             'is_featured'=>'sometimes|in:1',
             'brand_id'=>'nullable|exists:brands,id',
             'status'=>'required|in:active,inactive',
-            'condition'=>'required|in:default,new,hot',
+            'condition'=>'in:default,new,hot',
             'price'=>'required|numeric',
             'discount'=>'nullable|numeric'
         ]);
 
-        $data=$request->all();
-        $data['is_featured']=$request->input('is_featured',0);
-        $size=$request->input('size');
-        if($size){
-            $data['size']=implode(',',$size);
-        }
-        else{
-            $data['size']='';
-        }
-        // return $data;
-        $status=$product->fill($data)->save();
-        if($status){
-            request()->session()->flash('success','Product Successfully updated');
-        }
-        else{
-            request()->session()->flash('error','Please try again!!');
+        $data = $request->all();
+        $data['is_featured'] = $request->input('is_featured', 0);
+        $status = $product->fill($data)->save();
+        if ($status) {
+            request()->session()->flash('success', 'Book Successfully updated');
+        } else {
+            request()->session()->flash('error', 'Please try again!!');
         }
         return redirect()->route('product.index');
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -178,10 +166,10 @@ class ProductController extends Controller
         $status=$product->delete();
         
         if($status){
-            request()->session()->flash('success','Product successfully deleted');
+            request()->session()->flash('success','Book successfully deleted');
         }
         else{
-            request()->session()->flash('error','Error while deleting product');
+            request()->session()->flash('error','Error while deleting book');
         }
         return redirect()->route('product.index');
     }

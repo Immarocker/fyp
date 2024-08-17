@@ -18,6 +18,7 @@
             <th>Quantity</th>
             <th>Charge</th>
             <th>Total Amount</th>
+            <th>Payment Type</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
@@ -29,7 +30,8 @@
             <td>{{$order->first_name}} {{$order->last_name}}</td>
             <td>{{$order->email}}</td>
             <td>{{$order->quantity}}</td>
-            <td>${{$order->shipping->price}}</td>
+            <td>{{$order->payment_method}}</td>
+            <td>Rs {{ $order->shipping ? $order->shipping->price : 'N/A' }}</td>
             <td>${{number_format($order->total_amount,2)}}</td>
             <td>
                 @if($order->status=='new')
@@ -80,7 +82,7 @@
                     </tr>
                     <tr>
                         <td>Shipping Charge</td>
-                        <td> : $ {{$order->shipping->price}}</td>
+                        <td>Rs {{ $order->shipping ? $order->shipping->price : 'N/A' }}</td>
                     </tr>
                     <tr>
                       <td>Coupon</td>
@@ -92,7 +94,7 @@
                     </tr>
                     <tr>
                         <td>Payment Method</td>
-                        <td> : @if($order->payment_method=='cod') Cash on Delivery @else Paypal @endif</td>
+                        <td> : @if($order->payment_method=='cod') Cash on Delivery @else Khalti @endif</td>
                     </tr>
                     <tr>
                         <td>Payment Status</td>

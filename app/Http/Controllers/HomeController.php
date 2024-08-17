@@ -209,22 +209,23 @@ class HomeController extends Controller
         }
 
     }
-
-    public function changePassword(){
+    public function changePassword()
+    {
         return view('user.layouts.userPasswordChange');
     }
-    public function changPasswordStore(Request $request)
-    {
-        $request->validate([
-            'current_password' => ['required', new MatchOldPassword],
-            'new_password' => ['required'],
-            'new_confirm_password' => ['same:new_password'],
-        ]);
-   
-        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-   
-        return redirect()->route('user')->with('success','Password successfully changed');
-    }
 
+    public function changPasswordStore(Request $request)
+{
+    $request->validate([
+        'current_password' => ['required', new MatchOldPassword],
+        'new_password' => ['required', 'min:8'],
+        'new_confirm_password' => ['same:new_password'],
+    ]);
+
+    // Proceed to update the password if validation passes
+    User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
+
+    return redirect()->route('user.change.password.form')->with('success', 'Password successfully changed');
+}
     
 }

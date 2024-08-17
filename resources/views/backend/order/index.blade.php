@@ -24,6 +24,7 @@
               <th>Quantity</th>
               <th>Charge</th>
               <th>Total Amount</th>
+              <th>Payment Type</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -37,6 +38,7 @@
               <th>Quantity</th>
               <th>Charge</th>
               <th>Total Amount</th>
+              <th>Payment Type</th>
               <th>Status</th>
               <th>Action</th>
               </tr>
@@ -52,8 +54,9 @@
                     <td>{{$order->first_name}} {{$order->last_name}}</td>
                     <td>{{$order->email}}</td>
                     <td>{{$order->quantity}}</td>
-                    <td>@foreach($shipping_charge as $data) $ {{number_format($data,2)}} @endforeach</td>
-                    <td>${{number_format($order->total_amount,2)}}</td>
+                    <td>@foreach($shipping_charge as $data) Rs {{number_format($data,2)}} @endforeach</td>
+                    <td>Rs {{number_format($order->total_amount,2)}}</td>
+                    <td>{{$order->payment_status}}</td>
                     <td>
                         @if($order->status=='new')
                           <span class="badge badge-primary">{{$order->status}}</span>
@@ -65,6 +68,7 @@
                           <span class="badge badge-danger">{{$order->status}}</span>
                         @endif
                     </td>
+
                     <td>
                         <a href="{{route('order.show',$order->id)}}" class="btn btn-warning btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="view" data-placement="bottom"><i class="fas fa-eye"></i></a>
                         <a href="{{route('order.edit',$order->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>

@@ -118,7 +118,7 @@
                                             $brands=DB::table('brands')->orderBy('title','ASC')->where('status','active')->get();
                                         @endphp
                                         @foreach($brands as $brand)
-                                            <li><a href="{{route('product-brand',$brand->slug)}}">{{$brand->title}}</a></li>
+                                        <li><a href="{{ route('product-brand', $brand->slug) }}">{{ $brand->title }}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -148,7 +148,6 @@
                                                 <option value="title" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='title') selected @endif>Name</option>
                                                 <option value="price" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='price') selected @endif>Price</option>
                                                 <option value="category" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='category') selected @endif>Category</option>
-                                                <option value="brand" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='brand') selected @endif>Author</option>
                                             </select>
                                         </div>
                                     </div>
@@ -199,7 +198,7 @@
                                     </div>
                                 @endforeach
                             @else
-                                    <h4 class="text-warning" style="margin:100px auto;">There are no products.</h4>
+                                    <h4 class="text-warning" style="margin:100px auto;">There are no books.</h4>
                             @endif
 
 
@@ -289,32 +288,17 @@
                                             <div class="quickview-peragraph">
                                                 <p>{!! html_entity_decode($product->summary) !!}</p>
                                             </div>
-                                            @if($product->size)
-                                                <div class="size">
-                                                    <h4>Size</h4>
-                                                    <ul>
-                                                        @php
-                                                            $sizes=explode(',',$product->size);
-                                                            // dd($sizes);
-                                                        @endphp
-                                                        @foreach($sizes as $size)
-                                                        <li><a href="#" class="one">{{$size}}</a></li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            @endif
-                                            <div class="size">
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-12">
-                                                        <h5 class="title">Size</h5>
-                                                        <select>
-                                                            @php
-                                                            $sizes=explode(',',$product->size);
-                                                            // dd($sizes);
-                                                            @endphp
-                                                            @foreach($sizes as $size)
-                                                                <option>{{$size}}</option>
-                                                            @endforeach
+                                            <div class="iban">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-12">
+                                                    @php
+                                                        $ibans = explode(',', $product->size); // Assuming the IBAN numbers are stored similarly in a comma-separated format
+                                                    @endphp
+                                                    @foreach($ibans as $iban)
+                                                        <p class="iban-display" style="font-weight: bold; margin-bottom: 10px;">
+                                                            <span style="color: orange;">IBAN-</span>{{$iban}}
+                                                        </p>
+                                                    @endforeach
                                                         </select>
                                                     </div>
                                                     {{-- <div class="col-lg-6 col-12">

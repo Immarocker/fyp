@@ -5,6 +5,15 @@
 <div class="card">
     <h5 class="card-header">Add Book</h5>
     <div class="card-body">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
       <form method="post" action="{{route('product.store')}}">
         {{csrf_field()}}
         <div class="form-group">
@@ -74,17 +83,8 @@
           @enderror
         </div>
         <div class="form-group">
-          <label for="size">Language</label>
-          <select name="size[]" class="form-control selectpicker" data-live-search="true">
-              <option value="">--Select a Language--</option>
-              <option value="Nepali">Nepali</option>
-              <option value="English">English</option>
-              <option value="Hindi">Hindi</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="pages">Pages</label>
-          <input type="number" name="pages" class="form-control" placeholder="Enter the number of pages">
+          <label for="size">IBAN</label>
+          <input type="text" name="size" class="form-control" multiple data-live-search="true" placeholder="IBAN Number">
         </div>
 
         <div class="form-group">
@@ -92,7 +92,7 @@
           {{-- {{$brands}} --}}
 
           <select name="brand_id" class="form-control">
-              <option value="">--Select an Author--</option>
+              <option value="">--Add Author--</option>
              @foreach($brands as $brand)
               <option value="{{$brand->id}}">{{$brand->title}}</option>
              @endforeach
@@ -103,9 +103,9 @@
           <label for="condition">Condition</label>
           <select name="condition" class="form-control">
               <option value="">--Select Condition--</option>
-              <option value="default">Best Seller</option>
-              <option value="new">New Arrivals</option>
-              <option value="hot">Nepali Books</option>
+              <option value="default">Default</option>
+              <option value="new">New</option>
+              <option value="Nepali">Nepali</option>
           </select>
         </div>
 

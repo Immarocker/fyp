@@ -99,22 +99,22 @@
 												</ul>
 											</div> --}}
 											<!--/ End Color -->
-											<!-- Size -->
+											<!-- IBAN -->
 											@if($product_detail->size)
-												<div class="size mt-4">
-													<h4>Size</h4>
-													<ul>
-														@php 
-															$sizes=explode(',',$product_detail->size);
-															// dd($sizes);
-														@endphp
-														@foreach($sizes as $size)
-														<li><a href="#" class="one">{{$size}}</a></li>
-														@endforeach
-													</ul>
-												</div>
-											@endif
-											<!--/ End Size -->
+											<div class="size mt-4">
+												<ul style="list-style-type: none; padding: 0;">
+													@php 
+														$sizes = explode(',', $product_detail->size); // Assuming IBAN numbers are stored as a comma-separated list
+													@endphp
+													@foreach($sizes as $size)
+														<li style="font-weight: bold; padding: 5px 0;">
+															<span style="color: orange;">IBAN-</span><span>{{$size}}</span>
+														</li>
+													@endforeach
+												</ul>
+											</div>
+										@endif
+											<!--/ IBAN -->
 											<!-- Product Buy -->
 											<div class="product-buy">
 												<form action="{{route('single-add-to-cart')}}" method="POST">

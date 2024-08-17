@@ -109,7 +109,8 @@ class Helper{
     public static function totalCartPrice($user_id=''){
         if(Auth::check()){
             if($user_id=="") $user_id=auth()->user()->id;
-            return Cart::where('user_id',$user_id)->where('order_id',null)->sum('amount');
+            $cart_value =  Cart::where('user_id',$user_id)->where('order_id',null)->sum('amount');
+            return $cart_value;
         }
         else{
             return 0;

@@ -428,6 +428,7 @@
                                             <div class="quickview-slider-active">
                                                 @php
                                                     $photo=explode(',',$product->photo);
+                                                   
                                                     foreach($photo as $p){
                                                     }
                                                 @endphp

@@ -18,6 +18,7 @@ use Hash;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 class FrontendController extends Controller
 {
    
@@ -403,8 +404,58 @@ class FrontendController extends Controller
     }
     // Reset password
     public function showResetForm(){
-        return view('auth.passwords.old-reset');
+        return view('frontend.pages.forgetpassword');
     }
+    public function changepasswordmail(){
+        return view('frontend.pages.changepasswordmail');
+    }
+
+    public function forgetPassword(Request $request)
+    {
+       
+        $email = $request->input('email');
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            return redirect('/forgetpassword')->with('message', 'This email is not registered yet!');
+        }
+
+        $request->session()->put('sessionUserEmail', $user->email);
+        $request->session()->save();
+
+        $data = [
+            'url' => url('/changepassword'),
+            'email' => $email,
+        ];
+        
+        Mail::send('email.forgetpassword', $data, function ($message) use ($data) {
+            $message->to($data['email']);
+            $message->from('kitabbhandaarr@gmail.com', 'Kitab Bhandaar'); // Set the 'from' address and name
+            $message->subject('Password Reset Link from Kitab Bhandaar');
+        });
+        
+
+        return redirect()->back()->with('message', 'Please check your email for password reset instructions.');
+    }
+
+    public function updatePasswordForget(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|min:6',
+        ]);
+        $user = User::where('email', session()->get('sessionUserEmail'))->first();
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found');
+        }
+        if (Hash::check($request->password, $user->password)) {
+            return redirect()->back()->with('error', 'Old password cannot be your new password');
+        }
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect('/')->with('success', 'Your password has been changed successfully');
+    }
+
+
 
     public function subscribe(Request $request){
         $request->validate([

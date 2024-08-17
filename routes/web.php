@@ -50,8 +50,11 @@
     Route::post('user/register', [FrontendController::class, 'registerSubmit'])->name('register.submit');
 // Reset password
     Route::post('submitpassword-reset', [FrontendController::class, 'showResetForm'])->name('password.reset');
-    Route::get('password-reset', [FrontendController::class, 'showResetForm'])->name('reset.password');
-    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::get('changepassword', [FrontendController::class, 'changepasswordmail'])->name('mail.changepasswords');
+
+    Route::post('updatepasswordforget', [FrontendController::class, 'updatePasswordForget'])->name('update.forgetpassword');
+    Route::post('sendpasswordlink', [FrontendController::class, 'forgetPassword'])->name('password.sendlink');
+    Route::get('password/reset', [FrontendController::class, 'showResetForm'])->name('password.request');
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('passwordtoken.reset');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
@@ -71,7 +74,7 @@
     Route::post('/product/search', [FrontendController::class, 'productSearch'])->name('product.search');
     Route::get('/product-cat/{slug}', [FrontendController::class, 'productCat'])->name('product-cat');
     Route::get('/product-sub-cat/{slug}/{sub_slug}', [FrontendController::class, 'productSubCat'])->name('product-sub-cat');
-    Route::get('/product-brand/{slug}', [FrontendController::class, 'productBrand'])->name('product-brand');
+    Route::get('/product-author/{slug}', [FrontendController::class, 'productBrand'])->name('product-brand');
 // Cart section
     Route::get('/add-to-cart/{slug}', [CartController::class, 'addToCart'])->name('add-to-cart')->middleware('user');
     Route::post('/add-to-cart', [CartController::class, 'singleAddToCart'])->name('single-add-to-cart')->middleware('user');
@@ -140,6 +143,9 @@ Route::get('/payment/cancel', [KhaltiController::class, 'cancel'])->name('paymen
         Route::resource('banner', 'BannerController');
         // Brand
         Route::resource('brand', 'BrandController');
+
+        Route::resource('author', 'AuthorController');
+
         // Profile
         Route::get('/profile', [AdminController::class, 'profile'])->name('admin-profile');
         Route::post('/profile/{id}', [AdminController::class, 'profileUpdate'])->name('profile-update');

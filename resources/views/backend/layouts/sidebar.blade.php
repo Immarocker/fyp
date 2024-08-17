@@ -92,8 +92,8 @@
         <div id="brandCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Author Options:</h6>
-            <a class="collapse-item" href="{{route('brand.index')}}">Authors</a>
-            <a class="collapse-item" href="{{route('brand.create')}}">Add Author</a>
+            <a class="collapse-item" href="{{route('author.index')}}">Authors</a>
+            <a class="collapse-item" href="{{route('author.create')}}">Add Author</a>
           </div>
         </div>
     </li>

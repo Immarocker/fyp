@@ -20,20 +20,20 @@
                 <div class="col-lg-6 col-md-12 col-12">
                     <!-- Top Right -->
                     <div class="right-content">
-                        <ul class="list-main">
-                            {{-- <li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li> --}}
-                            @auth 
-                                @if(Auth::user()->role=='admin')
-                                    <li><i class="ti-user"></i> <a href="{{route('admin')}}"  target="_blank">Dashboard</a></li>
-                                @else 
-                                    <li><i class="ti-user"></i> <a href="{{route('user')}}"  target="_blank">Dashboard</a></li>
-                                @endif
-                                <li><i class="ti-power-off"></i> <a href="{{route('user.logout')}}">Logout</a></li>
+                    <ul class="list-main">
+    {{-- <li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li> --}}
+    @auth 
+        @if(Auth::user()->role == 'admin')
+            <li><i class="ti-user"></i> <a href="{{ route('admin') }}">Dashboard</a></li>
+        @else 
+            <li><i class="ti-user"></i> <a href="{{ route('user') }}">{{ Auth::user()->name }}</a></li>
+        @endif
+        <li><i class="ti-power-off"></i> <a href="{{ route('user.logout') }}">Logout</a></li>
+    @else
+        <li><i class="ti-power-off"></i> <a href="{{ route('login.form') }}">Login</a> / <a href="{{ route('register.form') }}">Register</a></li>
+    @endauth
+</ul>
 
-                            @else
-                                <li><i class="ti-power-off"></i><a href="{{route('login.form')}}">Login /</a> <a href="{{route('register.form')}}">Register</a></li>
-                            @endauth
-                        </ul>
                     </div>
                     <!-- End Top Right -->
                 </div>

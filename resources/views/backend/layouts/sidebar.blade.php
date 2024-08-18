@@ -76,7 +76,7 @@
         </a>
         <div id="productCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Product Options:</h6>
+            <h6 class="collapse-header">Book Options:</h6>
             <a class="collapse-item" href="{{route('product.index')}}">Books</a>
             <a class="collapse-item" href="{{route('product.create')}}">Add Book</a>
           </div>
@@ -126,6 +126,11 @@
         <a class="nav-link" href="{{route('review.index')}}">
             <i class="fas fa-comments"></i>
             <span>Reviews</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('newsletter.index')}}">
+            <i class="fas fa-comments"></i>
+            <span>NewsLetter</span></a>
     </li>
     
 

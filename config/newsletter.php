@@ -1,19 +1,13 @@
 <?php
 
 return [
-
     'driver' => \Spatie\Newsletter\Drivers\MailChimpDriver::class,
-
-    'apiKey' => '0824261f5019d89d2ef48dc5e9afec07-us8',
-
-    'defaultListName' => 'kitabbhandaarr',
-
+    'apiKey' => env('MAILCHIMP_API_KEY'), // Make sure to pull the API key from .env
+    'defaultListName' => 'kitabbhandaar', // Ensure this matches exactly (case-sensitive)
     'lists' => [
         'kitabbhandaar' => [
-            'id' => env('MAILCHIMP_LIST_ID'),
+            'id' => env('MAILCHIMP_LIST_ID'), // This will resolve to 8b48ed9c6b
         ],
     ],
-
     'ssl' => true,
-
 ];

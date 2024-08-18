@@ -9,7 +9,8 @@ use App\Models\ProductReview;
 use App\Models\PostComment;
 use App\Rules\MatchOldPassword;
 use Hash;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 class HomeController extends Controller
 {
     /**
@@ -210,16 +211,26 @@ class HomeController extends Controller
 
     public function changPasswordStore(Request $request)
     {
-        
-        $request->validate([
+        // Create a validator instance
+        $validator = Validator::make($request->all(), [
             'current_password' => ['required', new MatchOldPassword],
             'new_password' => ['required', 'min:8'],
             'new_confirm_password' => ['same:new_password'],
         ]);
 
-        // Proceed to update the password if validation passes
-        User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
+        // Update the password
+        Auth::user()->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        // Redirect back with success message
         return redirect()->back()->with('success', 'Password successfully changed');
     }
 

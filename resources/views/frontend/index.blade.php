@@ -83,15 +83,7 @@
                 <div class="col-12">
                     <div class="section-title">
                         <h2>Trending Item</h2>
-                        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+                       
                     </div>
                 </div>
             </div>
@@ -138,7 +130,7 @@
                                                     <span class="out-of-stock">Sale out</span>
                                                 @elseif($product->condition=='new')
                                                     <span class="new">New</span>
-                                                @elseif($product->condition=='hot')
+                                                @elseif($product->condition=='nepali')
                                                     <span class="hot">Nepali</span>
                                                 @else
                                                     <span class="price-dec">{{$product->discount}}% Off</span>
@@ -235,7 +227,7 @@
             <div class="col-12">
                 <div class="owl-carousel popular-slider">
                     @foreach($product_lists as $product)
-                        @if($product->condition=='hot')
+                        @if($product->condition=='nepali')
                             <!-- Start Single Product -->
                         <div class="single-product">
                             <div class="product-img">

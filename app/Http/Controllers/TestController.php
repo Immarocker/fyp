@@ -9,7 +9,7 @@ class TestController extends FrontendController
     public function testMailchimp()
     {
         $apiKey = config('newsletter.apiKey');
-        $listId = config('newsletter.lists.Kitabbhandaar.id');
+        $listId = config('newsletter.lists.kitabbhandaar.id');
 
         return response()->json([
             'apiKey' => $apiKey,

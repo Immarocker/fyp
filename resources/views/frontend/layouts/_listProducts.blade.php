@@ -192,7 +192,7 @@
                         <a href="product-details.html">
                             <img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
                             <img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-                            <span class="out-of-stock">Hot</span>
+                            <span class="out-of-stock">Nepali</span>
                         </a>
                         <div class="button-head">
                             <div class="product-action">
@@ -412,7 +412,7 @@
                         <a href="product-details.html">
                             <img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
                             <img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-                            <span class="out-of-stock">Hot</span>
+                            <span class="out-of-stock">Nepali</span>
                         </a>
                         <div class="button-head">
                             <div class="product-action">
@@ -632,7 +632,7 @@
                         <a href="product-details.html">
                             <img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
                             <img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-                            <span class="out-of-stock">Hot</span>
+                            <span class="out-of-stock">Nepali</span>
                         </a>
                         <div class="button-head">
                             <div class="product-action">
@@ -852,7 +852,7 @@
                         <a href="product-details.html">
                             <img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
                             <img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-                            <span class="out-of-stock">Hot</span>
+                            <span class="out-of-stock">Nepali</span>
                         </a>
                         <div class="button-head">
                             <div class="product-action">
@@ -1072,7 +1072,7 @@
                         <a href="product-details.html">
                             <img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
                             <img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-                            <span class="out-of-stock">Hot</span>
+                            <span class="out-of-stock">Nepali</span>
                         </a>
                         <div class="button-head">
                             <div class="product-action">

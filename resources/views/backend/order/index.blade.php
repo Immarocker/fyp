@@ -82,9 +82,43 @@
             @endforeach
           </tbody>
         </table>
-        <span style="float:right">{{$orders->links()}}</span>
+        <div class="row">
+                        <div class="col-md-12 justify-content-center d-flex">
+                            <!-- Pagination -->
+                            @if ($orders->hasPages())
+                                <nav>
+                                    <ul class="pagination">
+                                        <!-- Previous Page Link -->
+                                        @if ($orders->onFirstPage())
+                                            <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                                        @else
+                                            <li class="page-item"><a class="page-link" href="{{ $orders->previousPageUrl() }}"
+                                                    rel="prev">&laquo;</a></li>
+                                        @endif
+
+                                        <!-- Pagination Elements -->
+                                        @foreach ($orders->getUrlRange(1, $orders->lastPage()) as $page => $url)
+                                            @if ($page == $orders->currentPage())
+                                                <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                                            @else
+                                                <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                            @endif
+                                        @endforeach
+
+                                        <!-- Next Page Link -->
+                                        @if ($orders->hasMorePages())
+                                            <li class="page-item"><a class="page-link" href="{{ $orders->nextPageUrl() }}"
+                                                    rel="next">&raquo;</a></li>
+                                        @else
+                                            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                                        @endif
+                                    </ul>
+                                </nav>
+                            @endif
+                        </div>
+                    </div>
         @else
-          <h6 class="text-center">No orders found!!! Please order some products</h6>
+          <h6 class="text-center">No orders found!!! Please order some orders</h6>
         @endif
       </div>
     </div>

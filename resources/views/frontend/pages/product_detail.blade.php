@@ -328,7 +328,7 @@
                                             <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
                                             <img class="hover-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
                                             <span class="price-dec">{{$data->discount}} % Off</span>
-                                                                    {{-- <span class="out-of-stock">Hot</span> --}}
+                                                                    {{-- <span class="out-of-stock">Nepali</span> --}}
                                         </a>
                                         <div class="button-head">
                                             <div class="product-action">

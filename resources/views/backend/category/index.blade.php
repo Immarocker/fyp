@@ -79,7 +79,41 @@
             @endforeach
           </tbody>
         </table>
-        <span style="float:right">{{$categories->links()}}</span>
+        <div class="row">
+                        <div class="col-md-12 justify-content-center d-flex">
+                            <!-- Pagination -->
+                            @if ($categories->hasPages())
+                                <nav>
+                                    <ul class="pagination">
+                                        <!-- Previous Page Link -->
+                                        @if ($categories->onFirstPage())
+                                            <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                                        @else
+                                            <li class="page-item"><a class="page-link" href="{{ $categories->previousPageUrl() }}"
+                                                    rel="prev">&laquo;</a></li>
+                                        @endif
+
+                                        <!-- Pagination Elements -->
+                                        @foreach ($categories->getUrlRange(1, $categories->lastPage()) as $page => $url)
+                                            @if ($page == $categories->currentPage())
+                                                <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                                            @else
+                                                <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                            @endif
+                                        @endforeach
+
+                                        <!-- Next Page Link -->
+                                        @if ($categories->hasMorePages())
+                                            <li class="page-item"><a class="page-link" href="{{ $categories->nextPageUrl() }}"
+                                                    rel="next">&raquo;</a></li>
+                                        @else
+                                            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                                        @endif
+                                    </ul>
+                                </nav>
+                            @endif
+                        </div>
+                    </div>
         @else
           <h6 class="text-center">No Categories found!!! Please create Category</h6>
         @endif

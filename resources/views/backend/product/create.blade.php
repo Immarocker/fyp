@@ -105,7 +105,7 @@
               <option value="">--Select Condition--</option>
               <option value="default">Default</option>
               <option value="new">New</option>
-              <option value="Nepali">Nepali</option>
+              <option value="nepali">Nepali</option>
           </select>
         </div>
 

@@ -19,9 +19,9 @@ class KhaltiController extends Controller
     public function payment()
     {
         $cart = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->get()->toArray();
-        
+
         $data = [];
-        
+
         $data['items'] = array_map(function ($item) {
             $name = Product::where('id', $item['product_id'])->pluck('title')->first();
             return [
@@ -119,38 +119,39 @@ class KhaltiController extends Controller
             'post_code' => 'string|nullable',
             'email' => 'string|required',
         ]);
-    
+
         if (empty(Cart::where('user_id', auth()->user()->id)->where('order_id', null)->first())) {
             request()->session()->flash('error', 'Cart is Empty!');
             return back();
         }
-    
+
         $order = new Order();
         $order_data = $request->all();
         $order_data['order_number'] = 'ORD-' . strtoupper(Str::random(10));
         $order_data['user_id'] = $request->user()->id;
         $order_data['shipping_id'] = $request->shipping;
-    
+
         $shipping = Shipping::where('id', $order_data['shipping_id'])->pluck('price');
         $order_data['sub_total'] = Helper::totalCartPrice();
         $order_data['quantity'] = Helper::cartCount();
-    
+
         if (session('coupon')) {
             $order_data['coupon'] = session('coupon')['value'];
         }
-    
+
         if ($request->shipping) {
             $order_data['total_amount'] = Helper::totalCartPrice() + $shipping[0] - (session('coupon')['value'] ?? 0);
         } else {
             $order_data['total_amount'] = Helper::totalCartPrice() - (session('coupon')['value'] ?? 0);
         }
-    
-        $order_data['status'] = "new";
+
+        $order_data['status'] = "process";
+        $order_data['payment_status'] = "paid";
         $order_data['payment_method'] = "khalti";
-    
+
         $order->fill($order_data);
         $status = $order->save();
-    
+
         if ($order) {
             $users = User::where('role', 'admin')->first();
             $details = [
@@ -159,15 +160,16 @@ class KhaltiController extends Controller
                 'fas' => 'fa-file-alt'
             ];
             Notification::send($users, new StatusNotification($details));
-    
+
             session()->forget('cart');
             session()->forget('coupon');
-            
+
             Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
-    
-           
+
+
         }
-       return redirect()->route('home')->with('success','Your order placed successfully');
+        session()->flash('success', 'Transaction successful!');
+        return response()->json(['status' => 'success']);
     }
-    
+
 }

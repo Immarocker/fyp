@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Brand extends Model
 {
+    protected $table = "author";
     protected $fillable=['title','slug','status'];
 
     // public static function getProductByBrand($id){

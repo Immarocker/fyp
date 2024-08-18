@@ -14,6 +14,7 @@
     use App\Http\Controllers\CouponController;
     use App\Http\Controllers\KhaltiController;
     use App\Http\Controllers\NotificationController;
+    use App\Http\Controllers\NewsLetterController;
     use App\Http\Controllers\HomeController;
     use \UniSharp\LaravelFilemanager\Lfm;
 
@@ -70,11 +71,11 @@
     Route::get('/about-us', [FrontendController::class, 'aboutUs'])->name('about-us');
     Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
     Route::post('/contact/message', [MessageController::class, 'store'])->name('contact.store');
-    Route::get('product-detail/{slug}', [FrontendController::class, 'productDetail'])->name('product-detail');
-    Route::post('/product/search', [FrontendController::class, 'productSearch'])->name('product.search');
-    Route::get('/product-cat/{slug}', [FrontendController::class, 'productCat'])->name('product-cat');
-    Route::get('/product-sub-cat/{slug}/{sub_slug}', [FrontendController::class, 'productSubCat'])->name('product-sub-cat');
-    Route::get('/product-author/{slug}', [FrontendController::class, 'productBrand'])->name('product-brand');
+    Route::get('book-detail/{slug}', [FrontendController::class, 'productDetail'])->name('product-detail');
+    Route::post('/book/search', [FrontendController::class, 'productSearch'])->name('product.search');
+    Route::get('/book-cat/{slug}', [FrontendController::class, 'productCat'])->name('product-cat');
+    Route::get('/book-sub-cat/{slug}/{sub_slug}', [FrontendController::class, 'productSubCat'])->name('product-sub-cat');
+    Route::get('/book-author/{slug}', [FrontendController::class, 'productBrand'])->name('product-brand');
 // Cart section
     Route::get('/add-to-cart/{slug}', [CartController::class, 'addToCart'])->name('add-to-cart')->middleware('user');
     Route::post('/add-to-cart', [CartController::class, 'singleAddToCart'])->name('single-add-to-cart')->middleware('user');
@@ -95,8 +96,8 @@
     Route::get('order/pdf/{id}', [OrderController::class, 'pdf'])->name('order.pdf');
     Route::get('/income', [OrderController::class, 'incomeChart'])->name('product.order.income');
 // Route::get('/user/chart',[AdminController::class, 'userPieChart'])->name('user.piechart');
-    Route::get('/product-grids', [FrontendController::class, 'productGrids'])->name('product-grids');
-    Route::get('/product-lists', [FrontendController::class, 'productLists'])->name('product-lists');
+    Route::get('/book-grids', [FrontendController::class, 'productGrids'])->name('product-grids');
+    Route::get('/book-lists', [FrontendController::class, 'productLists'])->name('product-lists');
     Route::match(['get', 'post'], '/filter', [FrontendController::class, 'productFilter'])->name('shop.filter');
 // Order Track
     Route::get('/product/track', [OrderController::class, 'orderTrack'])->name('order.track');
@@ -112,10 +113,10 @@
 // NewsLetter
     Route::post('/subscribe', [FrontendController::class, 'subscribe'])->name('subscribe');
    
-
+    Route::resource('/newsletter', 'NewsLetterController');
 // Product Review
     Route::resource('/review', 'ProductReviewController');
-    Route::post('product/{slug}/review', [ProductReviewController::class, 'store'])->name('productreview.store');
+    Route::post('book/{slug}/review', [ProductReviewController::class, 'store'])->name('productreview.store');
 
 // Post Comment
     Route::post('post/{slug}/comment', [PostCommentController::class, 'store'])->name('post-comment.store');

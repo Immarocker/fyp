@@ -112,7 +112,7 @@
                         <!-- Single Widget -->
                         <!--/ End Single Widget -->
                         <!-- Single Widget -->
-                        <div class="single-widget side-tags">
+                        <!-- <div class="single-widget side-tags">
                             <h3 class="title">Tags</h3>
                             <ul class="tag">
                                 @if(!empty($_GET['tag']))
@@ -131,11 +131,11 @@
                                     @endforeach
                                 </form>
                             </ul>
-                        </div>
+                        </div> -->
                         <!--/ End Single Widget -->
                         <!-- Single Widget -->
                         <div class="single-widget newsletter">
-                            <h3 class="title">Newslatter</h3>
+                            <h3 class="title">Newsletter</h3>
                             <div class="letter-inner">
                                 <h4>Subscribe & get news <br> latest updates.</h4>
                                 <form method="POST" action="{{route('subscribe')}}" class="form-inner">

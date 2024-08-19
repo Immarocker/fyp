@@ -161,7 +161,7 @@ Route::get('/payment/cancel', [KhaltiController::class, 'cancel'])->name('paymen
         // Post tag
         Route::resource('/post-tag', 'PostTagController');
         // Post
-        Route::resource('/post', 'PostController');
+        Route::resource('/post', 'PostController');                                                                                       
         // Message
         Route::resource('/message', 'MessageController');
         Route::get('/message/five', [MessageController::class, 'messageFive'])->name('messages.five');

@@ -173,7 +173,7 @@
       </li>
 
       <!-- Tags -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#tagCollapse" aria-expanded="true" aria-controls="tagCollapse">
             <i class="fas fa-tags fa-folder"></i>
             <span>Tags</span>
@@ -185,7 +185,7 @@
             <a class="collapse-item" href="{{route('post-tag.create')}}">Add Tag</a>
             </div>
         </div>
-    </li>
+    </li> -->
 
       <!-- Comments -->
       <li class="nav-item">

@@ -13,15 +13,15 @@ class CouponSeeder extends Seeder
     {
         $data=array(
             array(
-                'code'=>'abc123',
+                'code'=>'HERALD',
                 'type'=>'fixed',
                 'value'=>'300',
                 'status'=>'active'
             ),
             array(
-                'code'=>'111111',
+                'code'=>'FYP',
                 'type'=>'percent',
-                'value'=>'10',
+                'value'=>'100',
                 'status'=>'active'
             ),
         );

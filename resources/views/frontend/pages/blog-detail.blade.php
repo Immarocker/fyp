@@ -148,7 +148,7 @@
                             <ul class="categor-list">
                                 {{-- {{count(Helper::postCategoryList())}} --}}
                                 @foreach(Helper::postCategoryList('posts') as $cat)
-                                <li><a href="#">{{$cat->title}} </a></li>
+                                <li><a href="{{route('blog.category',$cat->slug)}}">{{$cat->title}} </a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -163,7 +163,7 @@
                                         <img src="{{$post->photo}}" alt="{{$post->photo}}">
                                     </div>
                                     <div class="content">
-                                        <h5><a href="#">{{$post->title}}</a></h5>
+                                        <h5><a href="{{route('blog.detail',$post->slug)}}">{{$post->title}}</a></h5>
                                         <ul class="comment">
                                             <li><i class="fa fa-calendar" aria-hidden="true"></i>{{$post->created_at->format('d M, y')}}</li>
                                             <li><i class="fa fa-user" aria-hidden="true"></i>

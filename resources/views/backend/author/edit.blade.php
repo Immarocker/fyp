@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title','E-SHOP || Author Edit')
+@section('title','Kitabbhandaar || Author Edit')
 @section('main-content')
 
 <div class="card">

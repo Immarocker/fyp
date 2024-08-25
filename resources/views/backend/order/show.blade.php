@@ -4,7 +4,6 @@
 
 @section('main-content')
 <div class="card">
-<h5 class="card-header">Order       <a href="{{route('order.pdf',$order->id)}}" class=" btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-download fa-sm text-white-50"></i> Generate PDF</a>
   </h5>
   <div class="card-body">
     @if($order)
@@ -32,7 +31,7 @@
             <td>{{$order->quantity}}</td>
             <td>{{$order->payment_method}}</td>
             <td>Rs {{ $order->shipping ? $order->shipping->price : 'N/A' }}</td>
-            <td>${{number_format($order->total_amount,2)}}</td>
+            <td>Rs {{number_format($order->total_amount,2)}}</td>
             <td>
                 @if($order->status=='new')
                   <span class="badge badge-primary">{{$order->status}}</span>
@@ -86,11 +85,11 @@
                     </tr>
                     <tr>
                       <td>Coupon</td>
-                      <td> : $ {{number_format($order->coupon,2)}}</td>
+                      <td> : Rs {{number_format($order->coupon,2)}}</td>
                     </tr>
                     <tr>
                         <td>Total Amount</td>
-                        <td> : $ {{number_format($order->total_amount,2)}}</td>
+                        <td> : Rs {{number_format($order->total_amount,2)}}</td>
                     </tr>
                     <tr>
                         <td>Payment Method</td>

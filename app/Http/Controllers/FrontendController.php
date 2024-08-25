@@ -209,12 +209,12 @@ class FrontendController extends Controller
     {
         $recent_products = Product::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
         $products = Product::orwhere('title', 'like', '%' . $request->search . '%')
-            ->orwhere('slug', 'like', '%' . $request->search . '%')
-            ->orwhere('description', 'like', '%' . $request->search . '%')
-            ->orwhere('summary', 'like', '%' . $request->search . '%')
-            ->orwhere('price', 'like', '%' . $request->search . '%')
-            ->orderBy('id', 'DESC')
-            ->paginate('9');
+        ->orwhere('slug', 'like', '%' . $request->search . '%')
+        ->orwhere('description', 'like', '%' . $request->search . '%')
+        ->orwhere('summary', 'like', '%' . $request->search . '%')
+        ->orwhere('price', 'like', '%' . $request->search . '%')
+        ->orderBy('id', 'DESC')
+        ->paginate('9');
         return view('frontend.pages.product-grids')->with('products', $products)->with('recent_products', $recent_products);
     }
 
@@ -444,11 +444,11 @@ class FrontendController extends Controller
 
         Mail::send('email.forgetpassword', $data, function ($message) use ($data) {
             $message->to($data['email']);
-            $message->from('kitabbhandaarr@gmail.com', 'Kitab Bhandaar'); // Set the 'from' address and name
+            $message->from('kitabbhandaarr@gmail.com', 'Kitab Bhandaar');
             $message->subject('Password Reset Link from Kitab Bhandaar');
         });
 
-        return redirect()->back()->with('message', 'Please check your email for password reset instructions.');
+        return redirect()->back()->with('success', 'Please check your email for password reset instructions.');
     }
 
     public function updatePasswordForget(Request $request)
@@ -469,26 +469,31 @@ class FrontendController extends Controller
     }
 
 
-
     public function subscribe(Request $request)
     {
-      
+       
         $validator = Validator::make($request->all(), [
-            'subscriber_email' => 'required|email|unique:news_letters,email'
+            'subscriber_email' => 'required|email'
         ]);
-
-        
+    
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
+    
         try {
+           
+            $existingSubscriber = NewsLetter::where('email', $request->subscriber_email)->first();
+    
+            if ($existingSubscriber) {
+              
+                return redirect()->back()->with('error', 'This email is already subscribed to the newsletter.');
+            }
+    
            
             NewsLetter::create([
                 'email' => $request->subscriber_email
             ]);
-
-          
+     
             return redirect()->back()->with('success', 'Successfully subscribed to the newsletter');
         } catch (Exception $e) {
            
@@ -496,4 +501,5 @@ class FrontendController extends Controller
             return redirect()->back()->with('error', 'There was an issue with your subscription. Please try again later.');
         }
     }
+    
 }

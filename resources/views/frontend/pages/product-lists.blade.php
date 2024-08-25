@@ -151,10 +151,10 @@
 												<label>Show :</label>
 												<select class="show" name="show" onchange="this.form.submit();">
 													<option value="">Default</option>
-													<option value="9" @if(!empty($_GET['show']) && $_GET['show']=='9') selected @endif>09</option>
-													<option value="15" @if(!empty($_GET['show']) && $_GET['show']=='15') selected @endif>15</option>
-													<option value="21" @if(!empty($_GET['show']) && $_GET['show']=='21') selected @endif>21</option>
+													<option value="10" @if(!empty($_GET['show']) && $_GET['show']=='10') selected @endif>10</option>
+													<option value="20" @if(!empty($_GET['show']) && $_GET['show']=='20') selected @endif>20</option>
 													<option value="30" @if(!empty($_GET['show']) && $_GET['show']=='30') selected @endif>30</option>
+													<option value="35" @if(!empty($_GET['show']) && $_GET['show']=='35') selected @endif>35</option>
 												</select>
 											</div>
 											<div class="single-shorter">
@@ -163,8 +163,8 @@
 													<option value="">Default</option>
 													<option value="title" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='title') selected @endif>Name</option>
 													<option value="price" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='price') selected @endif>Price</option>
-													<option value="category" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='category') selected @endif>Category</option>
-											
+													<!-- <option value="category" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='category') selected @endif>Category</option>
+											 -->
 												</select>
 											</div>
 										</div>
@@ -312,14 +312,14 @@
 												</div>
 												@if($product->size)
 													<div class="size">
-														<h4>Size</h4>
 														<ul>
 															@php 
 																$sizes=explode(',',$product->size);
 																// dd($sizes);
 															@endphp
 															@foreach($sizes as $size)
-															<li><a href="#" class="one">{{$size}}</a></li>
+															<li style="font-weight: bold; padding: 5px 0;">
+																<span style="color: orange;">IBAN-</span><span>{{$size}}</span>
 															@endforeach
 														</ul>
 													</div>

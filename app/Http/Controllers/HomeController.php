@@ -214,7 +214,7 @@ class HomeController extends Controller
         // Create a validator instance
         $validator = Validator::make($request->all(), [
             'current_password' => ['required', new MatchOldPassword],
-            'new_password' => ['required', 'min:8'],
+            'new_password' => ['required', 'min:4'],
             'new_confirm_password' => ['same:new_password'],
         ]);
 

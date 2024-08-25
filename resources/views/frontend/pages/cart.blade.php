@@ -41,7 +41,7 @@
 								@if(Helper::getAllProductFromCart())
 									@foreach(Helper::getAllProductFromCart() as $key=>$cart)
 										<tr>
-											S
+											
 											@php
 											$photo=explode(',',$cart->product['photo']);
 											@endphp

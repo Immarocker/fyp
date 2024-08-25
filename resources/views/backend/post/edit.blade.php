@@ -54,16 +54,7 @@
                 $post_tags=explode(',',$post->tags);
                 // dd($tags);
               @endphp
-        <div class="form-group">
-          <label for="tags">Tag</label>
-          <select name="tags[]" multiple  data-live-search="true" class="form-control selectpicker">
-              <option value="">--Select any tag--</option>
-              @foreach($tags as $key=>$data)
-              
-              <option value="{{$data->title}}"  {{(( in_array( "$data->title",$post_tags ) ) ? 'selected' : '')}}>{{$data->title}}</option>
-              @endforeach
-          </select>
-        </div>
+       
         <div class="form-group">
           <label for="added_by">Author</label>
           <select name="added_by" class="form-control">

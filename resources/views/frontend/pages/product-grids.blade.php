@@ -89,7 +89,7 @@
                         <!--/ End Shop By Price -->
                         <!-- Single Widget -->
                         <div class="single-widget recent-post">
-                            <h3 class="title">Recent post</h3>
+                            <h3 class="title">Recent Books</h3>
                             {{-- {{dd($recent_products)}} --}}
                             @foreach($recent_products as $product)
                                                         <!-- Single Post -->
@@ -141,14 +141,14 @@
                                         <label>Show :</label>
                                         <select class="show" name="show" onchange="this.form.submit();">
                                             <option value="">Default</option>
-                                            <option value="9" @if(!empty($_GET['show']) && $_GET['show'] == '9') selected
-                                            @endif>09</option>
-                                            <option value="15" @if(!empty($_GET['show']) && $_GET['show'] == '15')
-                                            selected @endif>15</option>
-                                            <option value="21" @if(!empty($_GET['show']) && $_GET['show'] == '21')
-                                            selected @endif>21</option>
+                                            <option value="10" @if(!empty($_GET['show']) && $_GET['show'] == '10') selected
+                                            @endif>10</option>
+                                            <option value="20" @if(!empty($_GET['show']) && $_GET['show'] == '20')
+                                            selected @endif>20</option>
                                             <option value="30" @if(!empty($_GET['show']) && $_GET['show'] == '30')
                                             selected @endif>30</option>
+                                            <option value="35" @if(!empty($_GET['show']) && $_GET['show'] == '35')
+                                            selected @endif>35</option>
                                         </select>
                                     </div>
                                     <div class="single-shorter">
@@ -163,10 +163,10 @@
                                                 !empty($_GET['sortBy']) &&
                                                 $_GET['sortBy'] == 'price'
                                             ) selected @endif>Price</option>
-                                            <option value="category" @if(
+                                            <!-- <option value="category" @if(
                                                 !empty($_GET['sortBy']) &&
                                                 $_GET['sortBy'] == 'category'
-                                            ) selected @endif>Category</option>
+                                            ) selected @endif>Category</option> -->
                                         </select>
                                     </div>
                                 </div>
